@@ -31,12 +31,11 @@ public class Main {
         System.out.println("Total tasks to execute: " + totalTasks);
         List<Future<?>> futureList = new ArrayList<>();
         UUID grp_1 = randomUUID();
-        UUID grp_2 = randomUUID();
         System.out.println("TaskGroupUUID : " + grp_1 + " is used to specify tasks with same TaskGroup.\n");
 
         // Logic to submit tasks to the TaskExecutor
-        IntStream.range(0, totalTasks).forEach(n -> futureList.add(
-                taskExecutor.submitTask(getTask(randomUUID(), getRandomGroup(grp_1, grp_2), getRandomTaskType()))));
+        IntStream.range(0, totalTasks).forEach(n -> futureList.add(taskExecutor.submitTask(
+                getTask(randomUUID(), getRandomGroup(grp_1, randomUUID()), getRandomTaskType()))));
 
         // Printing result of async task execution here....
         for (Future<?> task : futureList) {
