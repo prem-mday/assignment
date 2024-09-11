@@ -2,8 +2,3 @@
 .gradle
 .idea
 /build/
-
-# Package Files #
-*.jar
-*.war
-*.ear
