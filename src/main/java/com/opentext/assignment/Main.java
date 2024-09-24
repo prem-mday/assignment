@@ -25,17 +25,14 @@ public class Main {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        int totalTasks = 10;
-        int currency = 10;
-        TaskExecutorService taskExecutor = new Main().new TaskExecutorService(currency);
-        System.out.println("Total tasks to execute: " + totalTasks);
+        TaskExecutorService taskExecutor = new Main().new TaskExecutorService(10);
         List<Future<?>> futureList = new ArrayList<>();
-        UUID grp_1 = randomUUID();
-        System.out.println("TaskGroupUUID : " + grp_1 + " is used to specify tasks with same TaskGroup.\n");
+        UUID sameGroupUUID = randomUUID();
+        System.out.println("TaskGroupUUID : " + sameGroupUUID + " is used to specify tasks with same TaskGroup.\n");
 
         // Logic to submit tasks to the TaskExecutor
-        IntStream.range(0, totalTasks).forEach(n -> futureList.add(taskExecutor.submitTask(
-                getTask(randomUUID(), getRandomGroup(grp_1, randomUUID()), getRandomTaskType()))));
+        IntStream.range(0, 10).forEach(n -> futureList.add(taskExecutor.submitTask(
+                getTask(randomUUID(), getRandomGroup(sameGroupUUID, randomUUID()), getRandomTaskType()))));
 
         // Printing result of async task execution here....
         for (Future<?> task : futureList) {
